@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  mysql-local:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=tiny
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+    restart: on-failure
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: 'sbaychev/tiny'
+    restart: on-failure
+    depends_on:
+      - mysql-local
+    ports:
+      - 8081:8081
