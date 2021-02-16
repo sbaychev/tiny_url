@@ -32,7 +32,8 @@ public interface ITinyUrlRepository extends JpaRepository<TinyUrl, Long> {
     @Lock(LockModeType.PESSIMISTIC_READ)
     Optional<TinyUrl> findByOriginalUrl(String originalUrl);
 
-    @Modifying
+
+    @Modifying(clearAutomatically=true, flushAutomatically=true)
     @Query(value = "UPDATE tiny u SET u.times_accessed = u.times_accessed + 1 WHERE u.the_tiny_url = ?", nativeQuery = true)
     int updateTinySetTimesAccessedForTiny(String theTinyUrl);
 }
