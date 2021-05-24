@@ -36,7 +36,7 @@ public class TinyUrlApplication {
     @Bean
     public ObjectMapper objectMapper() {
 
-        ObjectMapper objectMapper = new ObjectMapper();
+        var objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
         return objectMapper;
@@ -52,7 +52,7 @@ public class TinyUrlApplication {
 
             LOG.info("The Tiny Url: {}", theTinyUrl);
 
-            TinyUrl aTinyUrl = TinyUrl.builder()
+            var aTinyUrl = TinyUrl.builder()
                 .theTinyUrl(theTinyUrl)
                 .timesAccessed(0)
                 .originalUrl("https://start.spring.io/")
